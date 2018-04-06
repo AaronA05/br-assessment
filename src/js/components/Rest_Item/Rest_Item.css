@@ -1,0 +1,27 @@
+.RI-full {
+    color: #FFFFFF;
+    background-color: black;
+    height: 180px;
+    width: 100vw;
+    vertical-align: text-bottom;
+    background-size: 100% auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.RI-header {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+}
+
+.RI-sub {
+    font-family: 'Lato', sans-serif;
+    font-size: 12px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.RI-header, .RI-sub {
+    margin-left: 12px;
+}
