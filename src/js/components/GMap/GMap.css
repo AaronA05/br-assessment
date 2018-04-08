@@ -1,0 +1,59 @@
+.GM-container {
+    color: #FFFFFF;
+    width: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+}
+
+.GM-map {
+    height: 180px;
+    position: relative;
+}
+
+.GM-banner {
+    height: 60px;
+    background-color: #34B379;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.GMB-header {
+    font-size: 16px;
+    margin-left: 12px;
+    color: #FFFFFF/rgb(255,255,255);
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+}
+
+.GMB-sub {
+    font-size: 12px;
+    margin-top: 6px;
+    margin-left: 12px;
+    color: #FFFFFF/rgb(255,255,255);
+    font-family: 'Lato', sans-serif;
+}
+
+.GMD-address {
+    margin-top: 16px;
+}
+
+.GMD-phone {
+    margin-top: 26px;
+}
+
+.GMD-twitter {
+    margin-top: 26px;
+    margin-bottom: 26px;
+}
+
+.GMD-address,
+.GMD-phone,
+.GMD-twitter {
+    font-family: 'Lato', sans-serif;
+    margin-left: 12px;
+    font-size: 16px;
+    color: black;
+}

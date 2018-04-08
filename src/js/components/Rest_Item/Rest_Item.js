@@ -21,6 +21,8 @@ export default class Rest_Item extends Component {
                 <div className="RI-sub">
                     {this.props.type}
                 </div>
+                <div className="RI-cover">
+                </div>
             </div>
         );
     }

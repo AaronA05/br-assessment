@@ -52,7 +52,15 @@ module.exports = {
                     MiniCssExtractPlugin.loader,
                     "css-loader"
                 ]
-            }
+            },
+            // File loader for image assets -> ADDED IN THIS STEP
+            // We'll add only image extensions, but you can things like svgs, fonts and videos
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                    'file-loader',
+                ],
+            },
         ],
     },
     // Enable importing JS files without specifying their's extenstion
