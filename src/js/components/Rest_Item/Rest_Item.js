@@ -8,10 +8,10 @@ export default class Rest_Item extends Component {
 
     }
 
-
     render(){
+        const fullRest = this.props.fullRest;
         return (
-            <div className="RI-full" 
+            <button className="RI-full" onClick={()=>{this.props.callbackFromParent(fullRest)}}
                 style={{ 
                     backgroundImage: 'url(' + this.props.img + ')'   
                 }}>
@@ -23,7 +23,7 @@ export default class Rest_Item extends Component {
                 </div>
                 <div className="RI-cover">
                 </div>
-            </div>
+            </button>
         );
     }
 

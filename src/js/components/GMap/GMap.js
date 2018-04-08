@@ -11,43 +11,50 @@ export class MapContainer extends React.Component {
                 <div className='GM-map'>
                     <Map
                         google={this.props.google}
-                        // style={style}
-                        initialCenter={{
-                            lat: 32.950787, 
-                            lng: -96.821118
+                        center={{
+                            lat: this.props.lat, 
+                            lng: this.props.lng
                         }}
                         zoom={15}
                         onClick={this.onMapClicked}
                     >
-
-                    <Marker onClick={this.onMarkerClick}
-                        name={'Current location'} />
                     </Map>
                 </div>
                 <div className='GM-banner'>
                     <div className='GMB-header'>
-                        Restaurant Name
+                        {this.props.restName}
                     </div>
                     <div className='GMB-sub'>
-                        Category Type
+                        {this.props.restCat}
                     </div>
                 </div>
                 <div className='GM-detail'>
                     <div className='GMD-address'>
-                        5100 Belt Line Road, STE 502
+                        {this.props.restAddress}
                         <br></br>
-                        Dallas, TX 75206
+                        {this.props.restCity}
                     </div>
                     <div className='GMD-phone'>
-                        (972)387-2337
+                        {this.props.restPhone}
                     </div>
                     <div className='GMD-twitter'>
-                        @twitterhandle
+                        @{this.props.restTwitter}
                     </div>
                 </div>
             </div>
         );  
     }
+}
+
+MapContainer.defaultProps = {
+    lat: 32.950787,
+    lng: -96.821118,
+    restName: "Hopdoddy Burger Bar",
+    restCat: "Burgers",
+    restAddress: "5100 Belt Line Road, STE 502",
+    restCity: "Addison, TX 75254",
+    restPhone: "(972) 387-2337",
+    restTwitter: "hopdoddy"
 
 }
 

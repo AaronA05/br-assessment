@@ -16,9 +16,10 @@ export default class App extends Component {
         this.state = {
             error: null,
             isLoaded: false,
-            restaurants: []
+            restaurants: [],
+            selectedRestaurant: {}
         };
-
+        this.myCallback = this.myCallback.bind(this);
     }
 
     componentDidMount(){
@@ -26,7 +27,8 @@ export default class App extends Component {
             .then((res) => {
                 this.setState({
                     isLoaded: true,
-                    restaurants: res.data.restaurants[4]
+                    restaurants: res.data.restaurants,
+                    selectedRestaurant: res.data.restaurants[0]
                 });
                 console.log(this.state);
             },
@@ -37,10 +39,44 @@ export default class App extends Component {
                 })
             }
         )
+    }
+
+    myCallback(dataFromChild){
+        if(dataFromChild.contact == null){
+            dataFromChild.contact = {
+                formattedPhone: "No phone provided",
+                twitter: " -No Twitter"
+            };
+            this.setState({
+                selectedRestaurant: dataFromChild
+            }, () => {
+                console.log(this.state.selectedRestaurant);
+            })
+        } 
+        else if(dataFromChild.contact != null){
+            dataFromChild.contact = {
+                formattedPhone: dataFromChild.contact.formattedPhone || "No phone provided",
+                twitter: dataFromChild.contact.twitter || " -No Twitter"
+            }
+            this.setState({
+                selectedRestaurant: dataFromChild
+            }, () => {
+                console.log(this.state.selectedRestaurant);
+            })
+        }
+        
+        else {
+            this.setState({
+                selectedRestaurant: dataFromChild
+            }, () => {
+                console.log(this.state.selectedRestaurant);
+            }) 
+        }
 
     }
+
     render() {
-        const { err, isLoaded, restaurants } = this.state;
+        const { err, isLoaded, restaurants, selectedRestaurant } = this.state;
         if(err){
             return <div>Error: {err.message} </div>;
         }
@@ -53,14 +89,30 @@ export default class App extends Component {
                 <Header />
                 <div className='app-container'>
                     <div className='list-container'>
-                        <Rest_Item 
-                            img = {this.state.restaurants.backgroundImageURL}
-                            name = {this.state.restaurants.name}
-                            type = {this.state.restaurants.category}    
-                        />
+                        {this.state.restaurants.map((restaurants, key) => 
+                            <Rest_Item
+                                key={key}
+                                fullRest={restaurants}
+                                callbackFromParent={this.myCallback}
+                                img={restaurants.backgroundImageURL}
+                                name={restaurants.name}
+                                type={restaurants.category}
+                            />
+                        
+                        )}
+
                     </div>
                     <div className='detail-container'>
-                        <GMap />
+                        <GMap
+                            lat={this.state.selectedRestaurant.location.lat}
+                            lng={this.state.selectedRestaurant.location.lng}
+                            restName={this.state.selectedRestaurant.name}
+                            restCat={this.state.selectedRestaurant.category}
+                            restAddress={this.state.selectedRestaurant.location.formattedAddress[0]}
+                            restCity={this.state.selectedRestaurant.location.formattedAddress[1]}
+                            restPhone={this.state.selectedRestaurant.contact.formattedPhone}
+                            restTwitter={this.state.selectedRestaurant.contact.twitter}
+                        />
                     </div>
                 </div>
             </div>
