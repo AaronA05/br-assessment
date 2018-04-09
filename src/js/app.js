@@ -3,12 +3,14 @@ import { render } from 'react-dom';
 import axios from 'axios';
 import GMap from './components/GMap/GMap';
 import Rest_Item from './components/Rest_Item/Rest_Item';
-import Rest_Detail from './components/Rest_Detail/Rest_Detail';
 import Header from './components/Header/Header';
+import Slider from 'react-slide-out';
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react';
+import 'react-slide-out/lib/index.css';
 import '../css/reset.css';
 import '../css/style.css';
 
-// Google map Key = "AIzaSyAg_t-LWBGov2c22gDLV8v8mfmVRgq3etk"
+import closeIcon from '../assets/ic_close@2x.png';
 
 export default class App extends Component {
     constructor(props){
@@ -17,9 +19,11 @@ export default class App extends Component {
             error: null,
             isLoaded: false,
             restaurants: [],
-            selectedRestaurant: {}
+            selectedRestaurant: {},
+            isOpen: false
         };
         this.myCallback = this.myCallback.bind(this);
+        this.closeMenu = this.closeMenu.bind(this);
     }
 
     componentDidMount(){
@@ -48,7 +52,8 @@ export default class App extends Component {
                 twitter: " -No Twitter"
             };
             this.setState({
-                selectedRestaurant: dataFromChild
+                selectedRestaurant: dataFromChild,
+                isOpen: true
             }, () => {
                 console.log(this.state.selectedRestaurant);
             })
@@ -59,7 +64,8 @@ export default class App extends Component {
                 twitter: dataFromChild.contact.twitter || " -No Twitter"
             }
             this.setState({
-                selectedRestaurant: dataFromChild
+                selectedRestaurant: dataFromChild,
+                isOpen: true
             }, () => {
                 console.log(this.state.selectedRestaurant);
             })
@@ -67,12 +73,17 @@ export default class App extends Component {
         
         else {
             this.setState({
-                selectedRestaurant: dataFromChild
+                selectedRestaurant: dataFromChild,
+                isOpen: true
             }, () => {
                 console.log(this.state.selectedRestaurant);
             }) 
         }
 
+    }
+
+    closeMenu(){
+        this.setState({ isOpen: false })
     }
 
     render() {
@@ -103,7 +114,7 @@ export default class App extends Component {
 
                     </div>
                     <div className='detail-container'>
-                        <GMap
+                        <GMap 
                             lat={this.state.selectedRestaurant.location.lat}
                             lng={this.state.selectedRestaurant.location.lng}
                             restName={this.state.selectedRestaurant.name}
@@ -113,6 +124,26 @@ export default class App extends Component {
                             restPhone={this.state.selectedRestaurant.contact.formattedPhone}
                             restTwitter={this.state.selectedRestaurant.contact.twitter}
                         />
+                    </div>
+                    <div className='detail-slide'>
+                            <Slider
+                                isOpen={this.state.isOpen}
+                                onOutsideClick={() => this.setState({ isOpen: false })}>
+                                <Header 
+                                    image={closeIcon}
+                                    close={this.closeMenu}
+                                />
+                                <GMap
+                                    lat={this.state.selectedRestaurant.location.lat}
+                                    lng={this.state.selectedRestaurant.location.lng}
+                                    restName={this.state.selectedRestaurant.name}
+                                    restCat={this.state.selectedRestaurant.category}
+                                    restAddress={this.state.selectedRestaurant.location.formattedAddress[0]}
+                                    restCity={this.state.selectedRestaurant.location.formattedAddress[1]}
+                                    restPhone={this.state.selectedRestaurant.contact.formattedPhone}
+                                    restTwitter={this.state.selectedRestaurant.contact.twitter}
+                                />
+                            </Slider>
                     </div>
                 </div>
             </div>

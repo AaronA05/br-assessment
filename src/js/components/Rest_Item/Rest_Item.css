@@ -1,7 +1,7 @@
 .RI-full {
     color: #FFFFFF;
     height: 180px;
-    width: 360px;
+    width: 100vw;
     vertical-align: text-bottom;
     background-size: 100% auto;
     display: flex;
@@ -35,4 +35,47 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.612));
+}
+
+@media only screen and (min-width: 768px) {
+    .RI-full {
+        color: #FFFFFF;
+        height: 180px;
+        width: 360px;
+        vertical-align: text-bottom;
+        background-size: 100% auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        position: relative;
+    }
+
+    .RI-header {
+        font-family: 'Lato', sans-serif;
+        font-size: 16px;
+    }
+
+    .RI-sub {
+        font-family: 'Lato', sans-serif;
+        font-size: 12px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+    }
+
+    .RI-header,
+    .RI-sub {
+        margin-left: 12px;
+        z-index: 15;
+    }
+
+    .RI-cover {
+        z-index: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(rgba(255, 0, 0, 0), rgba(0, 0, 0, 0.612));
+    }
+
 }

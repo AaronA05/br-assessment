@@ -4,6 +4,7 @@ import axios from 'axios';
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react';
 import './GMap.css';
 
+
 export class MapContainer extends React.Component { 
     render(){
         return (
@@ -15,9 +16,13 @@ export class MapContainer extends React.Component {
                             lat: this.props.lat, 
                             lng: this.props.lng
                         }}
-                        zoom={15}
+                        defaultZoom={15}
                         onClick={this.onMapClicked}
                     >
+                        <Marker
+                            title={'The marker`s title will appear as a tooltip.'}
+                            name={'SOMA'}
+                            position={{ lat: this.props.lat, lng: this.props.lng }} />
                     </Map>
                 </div>
                 <div className='GM-banner'>
@@ -46,20 +51,7 @@ export class MapContainer extends React.Component {
     }
 }
 
-MapContainer.defaultProps = {
-    lat: 32.950787,
-    lng: -96.821118,
-    restName: "Hopdoddy Burger Bar",
-    restCat: "Burgers",
-    restAddress: "5100 Belt Line Road, STE 502",
-    restCity: "Addison, TX 75254",
-    restPhone: "(972) 387-2337",
-    restTwitter: "hopdoddy"
-
-}
-
-
 
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyAg_t-LWBGov2c22gDLV8v8mfmVRgq3etk")
+    apiKey: ("AIzaSyAcDTBtz6UavprwwouEP3b8RsYqnV6c8X8")
 })(MapContainer)
