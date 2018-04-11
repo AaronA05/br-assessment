@@ -10,7 +10,8 @@ import 'react-slide-out/lib/index.css';
 import '../css/reset.css';
 import '../css/style.css';
 
-import closeIcon from '../assets/ic_close@2x.png';
+import closeIcon from '../assets/ic_webBack@2x.png';
+import mapIcon from '../assets/icon_map@2x.png';
 
 export default class App extends Component {
     constructor(props){
@@ -20,7 +21,7 @@ export default class App extends Component {
             isLoaded: false,
             restaurants: [],
             selectedRestaurant: {},
-            isOpen: false
+            isOpen: false,
         };
         this.myCallback = this.myCallback.bind(this);
         this.closeMenu = this.closeMenu.bind(this);
@@ -34,7 +35,6 @@ export default class App extends Component {
                     restaurants: res.data.restaurants,
                     selectedRestaurant: res.data.restaurants[0]
                 });
-                console.log(this.state);
             },
             (err) => {
                 this.setState({
@@ -53,9 +53,7 @@ export default class App extends Component {
             };
             this.setState({
                 selectedRestaurant: dataFromChild,
-                isOpen: true
-            }, () => {
-                console.log(this.state.selectedRestaurant);
+                isOpen: true,
             })
         } 
         else if(dataFromChild.contact != null){
@@ -65,18 +63,14 @@ export default class App extends Component {
             }
             this.setState({
                 selectedRestaurant: dataFromChild,
-                isOpen: true
-            }, () => {
-                console.log(this.state.selectedRestaurant);
+                isOpen: true,
             })
         }
         
         else {
             this.setState({
                 selectedRestaurant: dataFromChild,
-                isOpen: true
-            }, () => {
-                console.log(this.state.selectedRestaurant);
+                isOpen: true,
             }) 
         }
 
@@ -126,24 +120,25 @@ export default class App extends Component {
                         />
                     </div>
                     <div className='detail-slide'>
-                            <Slider
-                                isOpen={this.state.isOpen}
-                                onOutsideClick={() => this.setState({ isOpen: false })}>
-                                <Header 
-                                    image={closeIcon}
-                                    close={this.closeMenu}
-                                />
-                                <GMap
-                                    lat={this.state.selectedRestaurant.location.lat}
-                                    lng={this.state.selectedRestaurant.location.lng}
-                                    restName={this.state.selectedRestaurant.name}
-                                    restCat={this.state.selectedRestaurant.category}
-                                    restAddress={this.state.selectedRestaurant.location.formattedAddress[0]}
-                                    restCity={this.state.selectedRestaurant.location.formattedAddress[1]}
-                                    restPhone={this.state.selectedRestaurant.contact.formattedPhone}
-                                    restTwitter={this.state.selectedRestaurant.contact.twitter}
-                                />
-                            </Slider>
+                        <Slider
+                            isOpen={this.state.isOpen}
+                            onOutsideClick={() => this.setState({ isOpen: false })}>
+                            <Header 
+                                image={closeIcon}
+                                close={this.closeMenu}
+                                mapIcon={mapIcon}
+                            />
+                            <GMap
+                                lat={this.state.selectedRestaurant.location.lat}
+                                lng={this.state.selectedRestaurant.location.lng}
+                                restName={this.state.selectedRestaurant.name}
+                                restCat={this.state.selectedRestaurant.category}
+                                restAddress={this.state.selectedRestaurant.location.formattedAddress[0]}
+                                restCity={this.state.selectedRestaurant.location.formattedAddress[1]}
+                                restPhone={this.state.selectedRestaurant.contact.formattedPhone}
+                                restTwitter={this.state.selectedRestaurant.contact.twitter}
+                            />
+                        </Slider>
                     </div>
                 </div>
             </div>

@@ -4,8 +4,7 @@ import axios from 'axios';
 import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react';
 import './GMap.css';
 
-
-export class MapContainer extends React.Component { 
+export class MapContainer extends React.Component {
     render(){
         return (
             <div className='GM-container'>
@@ -13,11 +12,10 @@ export class MapContainer extends React.Component {
                     <Map
                         google={this.props.google}
                         center={{
-                            lat: this.props.lat, 
-                            lng: this.props.lng
+                            lat: 32.950787,
+                            lng: -96.821118
                         }}
                         defaultZoom={15}
-                        onClick={this.onMapClicked}
                     >
                         <Marker
                             title={'The marker`s title will appear as a tooltip.'}

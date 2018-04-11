@@ -1,9 +1,8 @@
-// We are using node's native package 'path'
-// https://nodejs.org/api/path.html
+//standard npm path
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin"); //  -> ADDED IN THIS STEP
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 // Constant with our paths
 const paths = {
@@ -26,14 +25,12 @@ module.exports = {
             template: path.join(paths.SRC, 'index.html'),
         }),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
         })
     ],
     // Loaders configuration
-    // We are telling webpack to use "babel-loader" for .js and .jsx files
+    // use "babel-loader" for .js and .jsx files
     module: {
         rules: [
             {
@@ -43,9 +40,7 @@ module.exports = {
                     'babel-loader',
                 ],
             },
-            // CSS loader to CSS files -> ADDED IN THIS STEP
-            // Files will get handled by css loader and then passed to the extract text plugin
-            // which will write it to the file we defined above
+
             {
                 test: /\.css$/,
                 use: [
@@ -53,8 +48,7 @@ module.exports = {
                     "css-loader"
                 ]
             },
-            // File loader for image assets -> ADDED IN THIS STEP
-            // We'll add only image extensions, but you can things like svgs, fonts and videos
+
             {
                 test: /\.(png|jpg|gif)$/,
                 use: [
@@ -64,12 +58,6 @@ module.exports = {
         ],
     },
     // Enable importing JS files without specifying their's extenstion
-    //
-    // So we can write:
-    // import MyComponent from './my-component';
-    //
-    // Instead of:
-    // import MyComponent from './my-component.jsx';
     resolve: {
         extensions: ['.js', '.jsx'],
     },

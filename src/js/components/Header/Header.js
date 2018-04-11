@@ -13,6 +13,9 @@ export default class Header extends React.Component {
                 <div className='header-text'>
                     Lunch Tyme
                 </div>
+                <a href='#'>
+                    <img id="map-icon" src={this.props.mapIcon}></img>
+                </a>
             </div>
         )
     }
