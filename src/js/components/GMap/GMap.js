@@ -11,7 +11,7 @@ export class MapContainer extends React.Component {
                 <div className='GM-map'>
                     <Map
                         google={this.props.google}
-                        center={{
+                        initialCenter={{
                             lat: 32.950787,
                             lng: -96.821118
                         }}
