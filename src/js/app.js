@@ -35,6 +35,7 @@ export default class App extends Component {
                     restaurants: res.data.restaurants,
                     selectedRestaurant: res.data.restaurants[0]
                 });
+                console.log(this.state.selectedRestaurant)
             },
             (err) => {
                 this.setState({
@@ -55,6 +56,7 @@ export default class App extends Component {
                 selectedRestaurant: dataFromChild,
                 isOpen: true,
             })
+            console.log(this.state.selectedRestaurant)
         } 
         else if(dataFromChild.contact != null){
             dataFromChild.contact = {
@@ -65,6 +67,7 @@ export default class App extends Component {
                 selectedRestaurant: dataFromChild,
                 isOpen: true,
             })
+            console.log(this.state.selectedRestaurant)
         }
         
         else {
@@ -72,6 +75,7 @@ export default class App extends Component {
                 selectedRestaurant: dataFromChild,
                 isOpen: true,
             }) 
+            console.log(this.state.selectedRestaurant)
         }
 
     }
@@ -113,7 +117,7 @@ export default class App extends Component {
                             lng={this.state.selectedRestaurant.location.lng}
                             restName={this.state.selectedRestaurant.name}
                             restCat={this.state.selectedRestaurant.category}
-                            restAddress={this.state.selectedRestaurant.location.formattedAddress[0]}
+                            restAddress={this.state.selectedRestaurant.location.address}
                             restCity={this.state.selectedRestaurant.location.formattedAddress[1]}
                             restPhone={this.state.selectedRestaurant.contact.formattedPhone}
                             restTwitter={this.state.selectedRestaurant.contact.twitter}
@@ -133,7 +137,7 @@ export default class App extends Component {
                                 lng={this.state.selectedRestaurant.location.lng}
                                 restName={this.state.selectedRestaurant.name}
                                 restCat={this.state.selectedRestaurant.category}
-                                restAddress={this.state.selectedRestaurant.location.formattedAddress[0]}
+                                restAddress={this.state.selectedRestaurant.location.address}
                                 restCity={this.state.selectedRestaurant.location.formattedAddress[1]}
                                 restPhone={this.state.selectedRestaurant.contact.formattedPhone}
                                 restTwitter={this.state.selectedRestaurant.contact.twitter}

@@ -5,21 +5,33 @@ import { GoogleApiWrapper, Map, Marker, InfoWindow } from 'google-maps-react';
 import './GMap.css';
 
 export class MapContainer extends React.Component {
+    constructor(props){
+        super(props)
+    }
+
+    fetchPlaces(mapProps, map){
+        console.log(mapProps);
+        console.log(map);
+    }
+
     render(){
         return (
             <div className='GM-container'>
                 <div className='GM-map'>
                     <Map
                         google={this.props.google}
+                        center={{
+                            lat: this.props.lat,
+                            lng: this.props.lng
+                        }}
                         initialCenter={{
-                            lat: 32.950787,
-                            lng: -96.821118
+                            lat: this.props.lat,
+                            lng: this.props.lng
                         }}
                         defaultZoom={15}
+                        onReady={this.fetchPlaces}
                     >
                         <Marker
-                            title={'The marker`s title will appear as a tooltip.'}
-                            name={'SOMA'}
                             position={{ lat: this.props.lat, lng: this.props.lng }} />
                     </Map>
                 </div>
